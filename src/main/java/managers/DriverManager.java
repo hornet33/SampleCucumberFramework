@@ -12,11 +12,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class DriverManager {
     private WebDriver driver;
     private static DriverType driverType;
-    private static EnvType EnvType;
+    private static EnvType envType;
 
     public DriverManager() {
         driverType = FileReaderManager.getInstance().getConfigReader().getBrowser();
-        EnvType = FileReaderManager.getInstance().getConfigReader().getEnvironment();
+        envType = FileReaderManager.getInstance().getConfigReader().getEnvironment();
     }
 
     public WebDriver getDriver() {
@@ -25,7 +25,7 @@ public class DriverManager {
     }
 
     private WebDriver createDriver() {
-        switch (EnvType) {
+        switch (envType) {
             case LOCAL:
                 driver = createLocalDriver();
                 break;
