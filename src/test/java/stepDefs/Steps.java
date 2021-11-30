@@ -2,6 +2,7 @@ package stepDefs;
 
 import java.util.concurrent.TimeUnit;
 
+import dataProviders.ConfigFileReader;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,16 +20,20 @@ public class Steps {
     CheckoutPage checkoutPage;
     OrderPlacedSummaryPage orderPlacedSummaryPage;
     PagesManager pagesManager;
+    ConfigFileReader configFileReader;
 
     @Given("user is on Home Page")
     public void user_is_on_home_page() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        configFileReader = new ConfigFileReader();
         pagesManager = new PagesManager(driver);
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
         homePage = pagesManager.getHomePage();
-        homePage.navigateToHome("https://shop.demoqa.com/");
+        homePage.navigateToHome(configFileReader.getApplicationUrl());
     }
 
     @When("user searches for {string}")
