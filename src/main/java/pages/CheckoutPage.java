@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import testDataTypes.CustomerType;
 
 public class CheckoutPage {
     WebDriver driver;
@@ -81,6 +82,18 @@ public class CheckoutPage {
         enterPostCode("560098");
         enterPhone("1234567890");
         enterEmail("a@b.com");
+        enterComments("Test Comment" + Keys.TAB);
+    }
+
+    public void enterPersonalDetails(CustomerType customer){
+        enterFirstName(customer.firstName);
+        enterLastName(customer.lastName);
+        enterAddress1(customer.address.streetAddress);
+        enterAddress2(customer.address.streetAddress);
+        enterCity(customer.address.city);
+        enterPostCode(customer.address.postCode);
+        enterPhone(customer.phoneNumber.mob);
+        enterEmail(customer.emailAddress);
         enterComments("Test Comment" + Keys.TAB);
     }
 

@@ -77,4 +77,10 @@ public class ConfigFileReader {
         if (windowMaximize != null) return Boolean.valueOf(windowMaximize);
         else throw new RuntimeException("windowMaximize not specified in the config.properties file.");
     }
+
+    public String getTestDataPath() {
+        String testDataPath = properties.getProperty("testDataResourcePath");
+        if (testDataPath != null) return testDataPath;
+        else throw new RuntimeException("testDataResourcePath not specified in config.properties file.");
+    }
 }

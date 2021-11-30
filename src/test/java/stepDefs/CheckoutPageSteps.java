@@ -2,7 +2,9 @@ package stepDefs;
 
 import helpers.TestContext;
 import io.cucumber.java.en.When;
+import managers.FileReaderManager;
 import pages.CheckoutPage;
+import testDataTypes.CustomerType;
 
 public class CheckoutPageSteps {
     TestContext testContext;
@@ -13,9 +15,10 @@ public class CheckoutPageSteps {
         checkoutPage = testContext.getPageObjectManager().getCheckoutPage();
     }
 
-    @When("enters valid personal details on checkout page")
-    public void enters_valid_personal_details_on_checkout_page() {
-        checkoutPage.enterPersonalDetails();
+    @When("enters valid personal details of {string} on checkout page")
+    public void enters_valid_personal_details_on_checkout_page(String customerName) {
+        CustomerType customer = FileReaderManager.getInstance().getJsonDataReader().getCustomerByName(customerName);
+        checkoutPage.enterPersonalDetails(customer);
     }
 
     @When("accepts the t&c checkbox")

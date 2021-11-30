@@ -6,6 +6,7 @@ public class FileReaderManager {
 
     private static final FileReaderManager fileReaderManager = new FileReaderManager();
     private static ConfigFileReader configFileReader;
+    private static JsonDataReader jsonDataReader;
 
     private FileReaderManager() {
     }
@@ -16,5 +17,9 @@ public class FileReaderManager {
 
     public ConfigFileReader getConfigReader() {
         return (configFileReader == null) ? new ConfigFileReader() : configFileReader;
+    }
+
+    public JsonDataReader getJsonDataReader() {
+        return (jsonDataReader == null) ? new JsonDataReader() : jsonDataReader;
     }
 }
