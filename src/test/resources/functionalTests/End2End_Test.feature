@@ -16,4 +16,3 @@ Feature: End to end test from search to order item
     And clicks on the "Place order" button
     Then successful order confirmation message "Thank you. Your order has been received." is shown
     And an order number is displayed
-    And user closes the browser

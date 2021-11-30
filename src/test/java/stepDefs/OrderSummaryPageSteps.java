@@ -31,9 +31,4 @@ public class OrderSummaryPageSteps {
             Assert.assertTrue(true);
         } else Assert.fail();
     }
-
-    @And("user closes the browser")
-    public void user_closes_the_browser() {
-        driverManager.closeDriver();
-    }
 }
