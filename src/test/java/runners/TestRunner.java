@@ -7,7 +7,8 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/functionalTests",
-        glue= {"stepDefs"}
+        glue= {"stepDefs"},
+        plugin = {"pretty","html:target/HTMLReports/Junit-Report.html"}
 )
 public class TestRunner {
 }

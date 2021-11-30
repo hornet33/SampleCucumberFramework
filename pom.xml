@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.13.2</junit.version>
-        <selenium.version>4.0.0</selenium.version>
+        <selenium.version>3.141.59</selenium.version>
         <maven.compiler.version>3.7.0</maven.compiler.version>
         <cucumber.version>7.0.0</cucumber.version>
         <webdrivermanager.version>5.0.2</webdrivermanager.version>
