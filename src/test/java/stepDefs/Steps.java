@@ -1,15 +1,10 @@
 package stepDefs;
 
-import java.util.concurrent.TimeUnit;
-
-import dataProviders.ConfigFileReader;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import io.cucumber.java.en.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.*;
-import managers.PagesManager;
+import managers.*;
 
 public class Steps {
     WebDriver driver;
@@ -20,20 +15,16 @@ public class Steps {
     CheckoutPage checkoutPage;
     OrderPlacedSummaryPage orderPlacedSummaryPage;
     PagesManager pagesManager;
-    ConfigFileReader configFileReader;
+    DriverManager driverManager;
 
     @Given("user is on Home Page")
     public void user_is_on_home_page() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driverManager = new DriverManager();
+        driver = driverManager.getDriver();
 
-        configFileReader = new ConfigFileReader();
         pagesManager = new PagesManager(driver);
-
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(configFileReader.getImplicitlyWait(), TimeUnit.SECONDS);
         homePage = pagesManager.getHomePage();
-        homePage.navigateToHome(configFileReader.getApplicationUrl());
+        homePage.navigateToHome(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
     }
 
     @When("user searches for {string}")
@@ -102,11 +93,11 @@ public class Steps {
         String orderNumber = orderPlacedSummaryPage.getOrderId();
         if (Integer.parseInt(orderNumber) > 0) {
             Assert.assertTrue(true);
-        } else Assert.assertTrue(false);
+        } else Assert.fail();
     }
 
     @And("user closes the browser")
     public void user_closes_the_browser() {
-        driver.quit();
+        driverManager.closeDriver();
     }
 }
