@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import io.cucumber.java.en.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.*;
+import managers.PagesManager;
 
 public class Steps {
     WebDriver driver;
@@ -17,6 +18,7 @@ public class Steps {
     CartPage cartPage;
     CheckoutPage checkoutPage;
     OrderPlacedSummaryPage orderPlacedSummaryPage;
+    PagesManager pagesManager;
 
     @Given("user is on Home Page")
     public void user_is_on_home_page() {
@@ -24,7 +26,8 @@ public class Steps {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        homePage = new HomePage(driver);
+        pagesManager = new PagesManager(driver);
+        homePage = pagesManager.getHomePage();
         homePage.navigateToHome("https://shop.demoqa.com/");
     }
 
@@ -35,13 +38,13 @@ public class Steps {
 
     @When("choose to buy the first item from the search results")
     public void choose_to_buy_the_first_item_from_the_search_results() {
-        searchResultsPage = new SearchResultsPage(driver);
+        searchResultsPage = pagesManager.getSearchResultsPage();
         searchResultsPage.selectProductFromSearchResults(0);
     }
 
     @When("selects the color as {string}")
     public void selects_the_color_as(String string) {
-        productDetailsPage = new ProductDetailsPage(driver);
+        productDetailsPage = pagesManager.getProductDetailsPage();
         productDetailsPage.selectColor(string);
     }
 
@@ -62,13 +65,13 @@ public class Steps {
 
     @When("clicks on the \"Proceed to checkout\" link")
     public void clicks_on_the_proceed_to_checkout_link() {
-        cartPage = new CartPage(driver);
+        cartPage = pagesManager.getCartPage();
         cartPage.proceedToCheckout();
     }
 
     @When("enters valid personal details on checkout page")
     public void enters_valid_personal_details_on_checkout_page() {
-        checkoutPage = new CheckoutPage(driver);
+        checkoutPage = pagesManager.getCheckoutPage();
         checkoutPage.enterPersonalDetails();
     }
 
@@ -84,7 +87,7 @@ public class Steps {
 
     @Then("successful order confirmation message {string} is shown")
     public void successful_order_confirmation_message_is_shown(String string) {
-        orderPlacedSummaryPage = new OrderPlacedSummaryPage(driver);
+        orderPlacedSummaryPage = pagesManager.getOrderPlacedSummaryPage();
         String successTextDisplayed = orderPlacedSummaryPage.getSuccessMessage();
         Assert.assertEquals(successTextDisplayed, string);
     }
