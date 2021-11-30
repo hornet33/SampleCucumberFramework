@@ -85,23 +85,25 @@ public class CheckoutPage {
         enterComments("Test Comment" + Keys.TAB);
     }
 
-    public void enterPersonalDetails(CustomerType customer){
-        enterFirstName(customer.firstName);
-        enterLastName(customer.lastName);
-        enterAddress1(customer.address.streetAddress);
-        enterAddress2(customer.address.streetAddress);
-        enterCity(customer.address.city);
-        enterPostCode(customer.address.postCode);
-        enterPhone(customer.phoneNumber.mob);
-        enterEmail(customer.emailAddress);
-        enterComments("Test Comment" + Keys.TAB);
+    public void enterPersonalDetails(CustomerType customer) {
+        if (customer != null) {
+            enterFirstName(customer.firstName);
+            enterLastName(customer.lastName);
+            enterAddress1(customer.address.streetAddress);
+            enterAddress2(customer.address.streetAddress);
+            enterCity(customer.address.city);
+            enterPostCode(customer.address.postCode);
+            enterPhone(customer.phoneNumber.mob);
+            enterEmail(customer.emailAddress);
+            enterComments("Test Comment" + Keys.TAB);
+        } else enterPersonalDetails(); //default customer data
     }
 
-    public void checkTAndCBox(){
+    public void checkTAndCBox() {
         tAndCBox.click();
     }
 
-    public void placeOrder(){
+    public void placeOrder() {
         orderButton.click();
     }
 }
