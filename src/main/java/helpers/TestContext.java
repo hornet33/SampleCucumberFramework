@@ -3,8 +3,8 @@ package helpers;
 import managers.*;
 
 public class TestContext {
-    private DriverManager driverManager;
-    private PagesManager pagesManager;
+    private final DriverManager driverManager;
+    private final PagesManager pagesManager;
 
     public TestContext() {
         driverManager = new DriverManager();

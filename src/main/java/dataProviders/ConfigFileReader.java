@@ -10,11 +10,11 @@ import enums.*;
 
 public class ConfigFileReader {
 
-    private Properties properties;
-    private final String propertyFilePath = "src/test/resources/config.properties";
+    private final Properties properties;
 
     public ConfigFileReader() {
         BufferedReader reader;
+        String propertyFilePath = "src/test/resources/config.properties";
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
             properties = new Properties();
