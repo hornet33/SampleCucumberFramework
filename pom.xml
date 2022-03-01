@@ -14,8 +14,9 @@
         <junit.version>4.13.2</junit.version>
         <selenium.version>3.141.59</selenium.version>
         <maven.compiler.version>3.7.0</maven.compiler.version>
-        <cucumber.version>7.0.0</cucumber.version>
+        <cucumber.version>7.2.3</cucumber.version>
         <webdrivermanager.version>5.0.2</webdrivermanager.version>
+        <maven.failsafe.plugin.version>3.0.0-M5</maven.failsafe.plugin.version>
     </properties>
 
     <dependencies>
@@ -62,6 +63,41 @@
 
         <!-- End of Dependencies -->
     </dependencies>
+
+    <!-- Building a Profile to run TestRunner class from pom.xml -->
+    <profiles>
+        <profile>
+            <id>cuke</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!-- Using the failsafe plugin for E2E testing -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${maven.failsafe.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                                <configuration>
+                                    <systemPropertyVariables>
+                                        <cucumber.publish.quiet>
+                                            true
+                                        </cucumber.publish.quiet>
+                                    </systemPropertyVariables>
+                                    <includes>
+                                        <!-- failsafe plugin needs .class file -->
+                                        <include>TestRunner.java</include>
+                                    </includes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
