@@ -64,7 +64,7 @@
         <!-- End of Dependencies -->
     </dependencies>
 
-    <!-- Building a Profile to run TestRunner class from pom.xml -->
+    <!-- Building a Profile to run TestRunner from pom.xml -->
     <profiles>
         <profile>
             <id>cuke</id>
@@ -82,12 +82,12 @@
                                 </goals>
                                 <configuration>
                                     <systemPropertyVariables>
-                                        <cucumber.publish.quiet>
-                                            true
-                                        </cucumber.publish.quiet>
+                                        <!-- To disable default Cucumber messages at the end of the test -->
+                                        <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                                        <cucumber.publish.enabled>false</cucumber.publish.enabled>
                                     </systemPropertyVariables>
                                     <includes>
-                                        <!-- failsafe plugin needs .class file -->
+                                        <!-- include the Cucumber runner file here - this will trigger the tests -->
                                         <include>TestRunner.java</include>
                                     </includes>
                                 </configuration>
