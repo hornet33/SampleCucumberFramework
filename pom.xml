@@ -6,7 +6,6 @@
 
     <groupId>arch.hornet.qa</groupId>
     <artifactId>SampleCucumberFramework</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -68,50 +67,58 @@
     <profiles>
         <profile>
             <id>cuke</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
             <build>
-                <plugins>
-                    <plugin>
-                        <!-- Using the failsafe plugin for E2E testing -->
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven.failsafe.plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                </goals>
-                                <configuration>
-                                    <systemPropertyVariables>
-                                        <!-- To disable default Cucumber messages at the end of the test -->
-                                        <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                        <cucumber.publish.enabled>false</cucumber.publish.enabled>
-                                    </systemPropertyVariables>
-                                    <includes>
-                                        <!-- include the Cucumber runner file here - this will trigger the tests -->
-                                        <include>TestRunner.java</include>
-                                    </includes>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <!-- Using the failsafe plugin for E2E testing -->
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-failsafe-plugin</artifactId>
+                            <version>${maven.failsafe.plugin.version}</version>
+                            <executions>
+                                <execution>
+                                    <id>end-to-end</id>
+                                    <goals>
+                                        <goal>integration-test</goal>
+                                    </goals>
+                                    <configuration>
+                                        <systemPropertyVariables>
+                                            <!-- To disable default Cucumber messages at the end of the test -->
+                                            <cucumber.publish.quiet>true</cucumber.publish.quiet>
+                                            <cucumber.publish.enabled>false</cucumber.publish.enabled>
+                                        </systemPropertyVariables>
+                                        <includes>
+                                            <!-- include the Cucumber runner file here - this will trigger the tests -->
+                                            <include>TestRunner.class</include>
+                                        </includes>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
             </build>
         </profile>
     </profiles>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.version}</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.version}</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
