@@ -59,50 +59,7 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- End of Dependencies -->
-    </dependencies>
-
-    <!-- Building a Profile to run TestRunner from pom.xml -->
-    <profiles>
-        <profile>
-            <id>cuke</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <!-- Using the failsafe plugin for E2E testing -->
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-failsafe-plugin</artifactId>
-                            <version>${maven.failsafe.plugin.version}</version>
-                            <executions>
-                                <execution>
-                                    <id>end-to-end</id>
-                                    <goals>
-                                        <goal>integration-test</goal>
-                                    </goals>
-                                    <configuration>
-                                        <systemPropertyVariables>
-                                            <!-- To disable default Cucumber messages at the end of the test -->
-                                            <cucumber.publish.quiet>true</cucumber.publish.quiet>
-                                            <cucumber.publish.enabled>false</cucumber.publish.enabled>
-                                        </systemPropertyVariables>
-                                        <includes>
-                                            <!-- include the Cucumber runner file here - this will trigger the tests -->
-                                            <include>TestRunner.class</include>
-                                        </includes>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
-        </profile>
-    </profiles>
+    </dependencies>  <!-- End of Dependencies -->
 
     <build>
         <pluginManagement>
