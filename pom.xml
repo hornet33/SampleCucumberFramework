@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>arch.hornet.qa</groupId>
     <artifactId>SampleCucumberFramework</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -16,6 +16,7 @@
         <cucumber.version>7.2.3</cucumber.version>
         <webdrivermanager.version>5.0.2</webdrivermanager.version>
         <maven.failsafe.plugin.version>3.0.0-M5</maven.failsafe.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
     </properties>
 
     <dependencies>
@@ -62,20 +63,55 @@
     </dependencies>  <!-- End of Dependencies -->
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven.compiler.version}</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                        <encoding>UTF-8</encoding>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <!-- Using the failsafe plugin for E2E testing -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.failsafe.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>${maven.failsafe.plugin.version}</version>
+                    </dependency>
+                </dependencies>
+
+                <executions>
+                    <execution>
+                        <id>EndToEnd</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <!-- Using Junit4 properties to set Cucumber tags to be executed -->
+                                <!-- Can be over-ridden in CLI using "-Dcucumber.filter.tags=@nameoftag" -->
+                                <cucumber.filter.tags>@OrderEndToEnd</cucumber.filter.tags>
+                            </systemPropertyVariables>
+                            <!-- If runner program has "IT" (Integration Test) in the name, this section is not needed -->
+                            <!-- Else, must include the Cucumber runner file here -->
+                            <!-- If runner program has "Test" in the filename, it will be triggered by surefire plugin also -->
+                            <includes>
+                                <include>CukeRunner.java</include>
+                                <!-- Looks for this file in src/test/java directory -->
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.version}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <!--<encoding>UTF-8</encoding>-->
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
