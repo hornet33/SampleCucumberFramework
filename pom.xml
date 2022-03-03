@@ -71,6 +71,7 @@
                 <version>${maven.failsafe.plugin.version}</version>
                 <dependencies>
                     <dependency>
+                        <!-- This dependency is needed for Cucumber tags options -->
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-junit47</artifactId>
                         <version>${maven.failsafe.plugin.version}</version>
