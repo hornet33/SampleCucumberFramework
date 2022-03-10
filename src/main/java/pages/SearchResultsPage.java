@@ -9,7 +9,7 @@ import java.util.List;
 public class SearchResultsPage {
     WebDriver driver;
 
-    @FindBy(css = ".noo-product-inner")
+    @FindBy(xpath = "//div[@class='noo-product-thumbnail']")
     private List<WebElement> items;
 
     public SearchResultsPage(WebDriver driver) {
