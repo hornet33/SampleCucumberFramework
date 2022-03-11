@@ -10,12 +10,10 @@ import pages.OrderPlacedSummaryPage;
 public class OrderSummaryPageSteps {
     TestContext testContext;
     OrderPlacedSummaryPage orderPlacedSummaryPage;
-    DriverManager driverManager;
 
     public OrderSummaryPageSteps(TestContext context) {
         testContext = context;
         orderPlacedSummaryPage = testContext.getPageObjectManager().getOrderPlacedSummaryPage();
-        driverManager = testContext.getDriverManager();
     }
 
     @Then("successful order confirmation message {string} is shown")
