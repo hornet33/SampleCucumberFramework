@@ -1,7 +1,6 @@
 package dataProviders;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -13,7 +12,7 @@ public class ConfigFileReader {
     private final Properties properties;
 
     public ConfigFileReader() {
-        BufferedReader reader = null;
+        BufferedReader reader;
         String propertyFilePath = "src/test/resources/config.properties";
         try {
             reader =  new BufferedReader(new FileReader(propertyFilePath));
