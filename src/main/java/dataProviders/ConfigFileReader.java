@@ -13,19 +13,21 @@ public class ConfigFileReader {
     private final Properties properties;
 
     public ConfigFileReader() {
-        BufferedReader reader;
+        BufferedReader reader = null;
         String propertyFilePath = "src/test/resources/config.properties";
         try {
             reader =  new BufferedReader(new FileReader(propertyFilePath));
             properties = new Properties();
             try {
                 properties.load(reader);
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            catch (IOException e) {
+                throw new RuntimeException("Error loading config.properties file from " + propertyFilePath);
+            }
+            finally {
+                reader.close();
+            }
+        } catch (IOException e) {
             throw new RuntimeException("config.properties not found at " + propertyFilePath);
         }
     }
