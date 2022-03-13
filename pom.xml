@@ -125,6 +125,7 @@
         </plugins>
     </build>
 
+    <!-- Below profile is added for SonarQube integration using Jacoco plugin -->
     <profiles>
         <profile>
             <id>coverage</id>
