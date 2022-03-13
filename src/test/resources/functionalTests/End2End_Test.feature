@@ -7,7 +7,7 @@ Feature: End to end test from search to order item
     When user searches for "dress"
     And choose to buy the first item from the search results
     And selects the color as "White"
-    And selects the size as "Small"
+    And selects the size as "<size>"
     And clicks on the "Add to cart" button
     And clicks on the "View cart" link
     And clicks on the "Proceed to checkout" link
@@ -17,6 +17,6 @@ Feature: End to end test from search to order item
     Then successful order confirmation message "Thank you. Your order has been received." is shown
     And an order number is displayed
     Examples:
-      | customer |
-      | Rahul    |
-      | Virender |
+      | size   | customer |
+      | Small  | Rahul    |
+      | Medium | Virender |
