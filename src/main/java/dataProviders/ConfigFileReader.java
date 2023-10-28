@@ -68,6 +68,8 @@ public class ConfigFileReader {
                 return DriverType.FIREFOX;
             case "edge":
                 return DriverType.EDGE;
+            case "safari":
+                return DriverType.SAFARI;
             default:
                 throw new RuntimeException("Incorrect browser specified in config.properties file.");
         }
