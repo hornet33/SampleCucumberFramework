@@ -8,6 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import enums.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverManager {
     private WebDriver driver;
@@ -53,6 +54,10 @@ public class DriverManager {
             case EDGE:
                 WebDriverManager.edgedriver().setup();
                 driver = new EdgeDriver();
+                break;
+            case SAFARI:
+                WebDriverManager.safaridriver().setup();
+                driver = new SafariDriver();
                 break;
         }
 
