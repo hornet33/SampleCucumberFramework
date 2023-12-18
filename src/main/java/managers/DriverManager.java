@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import enums.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.safari.SafariDriver;
@@ -43,20 +42,16 @@ public class DriverManager {
 
     private WebDriver createLocalDriver() {
         switch (driverType) {
-            case FIREFOX:
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
             case CHROME:
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().clearDriverCache().setup();
                 driver = new ChromeDriver();
                 break;
             case EDGE:
-                WebDriverManager.edgedriver().setup();
+                WebDriverManager.edgedriver().clearDriverCache().setup();
                 driver = new EdgeDriver();
                 break;
             case SAFARI:
-                WebDriverManager.safaridriver().setup();
+                WebDriverManager.safaridriver().clearDriverCache().setup();
                 driver = new SafariDriver();
                 break;
         }
